@@ -1,0 +1,15 @@
+:root{
+    --dark: #202020;
+    --grey: #9ea3a1;
+    --dark_grey: #505050;
+    --yellow: #f5cb5c;
+}
+::-webkit-scrollbar {
+    width: 0;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Recursive', sans-serif;
+}

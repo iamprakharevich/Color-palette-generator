@@ -39,3 +39,7 @@ h2{
     font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 1px;
 }
+
+main{
+    height: 100%;
+}

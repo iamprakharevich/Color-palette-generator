@@ -33,3 +33,9 @@ header{
     align-items: center;
     justify-content: space-between;
 }
+
+h2{
+    color: #f5cb5c;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+}

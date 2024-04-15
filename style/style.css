@@ -26,7 +26,7 @@ body{
 
 header{
     top: 0;
-    padding: .5rem 2rem;
+    padding: .7rem 2rem;
     background-color: var(--dark);
     color: var(--grey);
 }
@@ -61,7 +61,7 @@ h2{
 
 .tools i:hover{
     color:var(--yellow);
-    text-shadow: 0 0 3px var(--yellow);
+    text-shadow: 0 0 3px rgba(245, 203, 92, .5);
 }
 
 .tools select{
@@ -84,6 +84,7 @@ main{
 
 .cell{
     height: 100%;
+    width: auto;
 }
 
 footer{

@@ -47,6 +47,17 @@ main{
     height: 100%;
 }
 
+.container{
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.cell{
+    height: 100%;
+}
+
 footer{
     width: 100%;
     display: flex;

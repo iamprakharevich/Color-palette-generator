@@ -43,6 +43,17 @@ h2{
     letter-spacing: 1px;
 }
 
+.hor_menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tools{
+    display: flex;
+    gap: 0.5rem;
+}
+
 main{
     height: 100%;
 }

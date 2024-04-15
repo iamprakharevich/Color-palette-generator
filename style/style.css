@@ -69,6 +69,7 @@ h2{
     background-color: var(--dark);
     color: var(--grey);
     border: none;
+    text-align: center;
 }
 
 main{

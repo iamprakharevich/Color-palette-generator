@@ -84,7 +84,11 @@ main{
 
 .cell{
     height: 100%;
-    width: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
 }
 
 footer{

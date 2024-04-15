@@ -52,6 +52,23 @@ h2{
 .tools{
     display: flex;
     gap: 0.5rem;
+    align-items: center;
+}
+
+.tools i{
+    transition: .3s all ease-in-out;
+}
+
+.tools i:hover{
+    color:var(--yellow);
+    text-shadow: 0 0 3px var(--yellow);
+}
+
+.tools select{
+    border-radius: 5px;
+    background-color: var(--dark);
+    color: var(--grey);
+    border: none;
 }
 
 main{

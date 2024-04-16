@@ -125,7 +125,7 @@ footer a{
         display: none;
     }
     .container{
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
     .cell{
         flex-wrap: wrap;

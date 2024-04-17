@@ -26,3 +26,9 @@ color_field = document.getElementById("color"),
 chosen_mode = "", chosen_color = "", chosen_code = "",
 mode = ["monochrome", "monochrome-dark", "monochrome-light", "analogic", "complement", "analogic-complement", "triad", "quad"],
 url = ""
+
+// Dynamic variable update function
+
+function updateAllParams() {
+    cells = document.querySelectorAll(".cells")
+}

@@ -125,6 +125,9 @@ footer a{
     .tools label{
         display: none;
     }
+    .fa-expand{
+        display: none;
+    }
     .container{
         flex-direction: column-reverse;
     }

@@ -114,6 +114,23 @@ async function getColors(){
     })
 }
 
+function addCell() {
+    var div = document.createElement('div')
+    div.className = "cell"
+    url = url.substring(0, url.length-1) + (cells.length+1)
+    fetch(url).then(res=>res.json()).then(result=>{
+        div.innerHTML = `<div class = "shadesField"></div><div class="colorTools"><i class="fa-solid fa-trash"></i><i class="fa-solid fa-heart"></i><i class="fa-solid fa-swatchbook"></i><i class="fa-solid fa-lock-open"></i></div><div class="colorInfo"><p class="colorCode">${result.colors[cells.length-1].hex.value}</p><p class="colorname">${result.colors[cells.length-1].name.value}</p></div>`
+        div.setAttribute("style", `background: ${result.colors[cells.length-1].hex.value}; color: ${result.colors[cells.length-1].contrast.value}`)
+    })
+    container.append(div)
+}
+
+function removeCell() {
+    container.lastChild.remove()
+}
+
+//Event listeners
+
 document.addEventListener("DOMContentLoaded",()=>{
     getColors()
 })

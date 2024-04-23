@@ -170,3 +170,24 @@ reset_btn.addEventListener("click",()=>{ //reset all
     file_field.value = ""
     getColors()
 })
+
+//Hotkeys
+document.addEventListener('keypress', function(event) {
+    switch (event.code) {
+        case 'Space':
+            getColors()
+            break;
+        case 'NumpadAdd':
+            if (mode_field.value!="triad" || mode_field.value!="quad") {
+                addCell()
+            } 
+            break;
+        case 'NumpadSubtract':
+            if (mode_field.value!="triad" || mode_field.value!="quad") {
+                removeCell()
+            }
+            break;
+        default:
+            break;
+    }
+})

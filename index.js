@@ -21,6 +21,9 @@
 
 let container = document.querySelector(".container"),
 cells = document.querySelectorAll(".cell"),
+reset_btn = document.querySelector(".fa-arrows-rotate"),
+add_btn = document.querySelector(".fa-plus"),
+remove_btn = document.querySelector(".fa-minus"),
 mode_field = document.querySelector(".mode"),
 color_field = document.getElementById("color"),
 chosen_mode = "", chosen_color = "", chosen_code = "",
@@ -88,24 +91,20 @@ async function getColors(){
                 switch (codeSelector.value) {
                     case "hex":
                         chosen_code = result.colors[i].hex.value
-                        fontSize = `style = "font-size: 2.5rem;"`
                         break;
                     case "rgb":
                         chosen_code = result.colors[i].rgb.value
-                        fontSize = `style = "font-size: 2rem;"`
                         break;
                     case "hsl":
                         chosen_code = result.colors[i].hsl.value
-                        fontSize = `style = "font-size: 2rem;"`
                         break;
                     case "cmyk":
                         chosen_code = result.colors[i].cmyk.value
-                        fontSize = `style = "font-size: 2rem;"`
                         break;
                     default:
                         break;
                 }
-                element.innerHTML = `<div class = "shadesField"></div><div class="colorTools"><i class="fa-solid fa-trash"></i><i class="fa-solid fa-heart"></i><i class="fa-solid fa-swatchbook"></i><i class="fa-solid fa-lock-open"></i></div><div class="colorInfo"><p class="colorCode" ${fontSize}>${chosen_code}</p><p class="colorname">${result.colors[i].name.value}</p></div>`
+                element.innerHTML = `<div class = "shadesField"></div><div class="colorTools"><i class="fa-solid fa-trash"></i><i class="fa-solid fa-heart"></i><i class="fa-solid fa-swatchbook"></i><i class="fa-solid fa-lock-open"></i></div><div class="colorInfo"><p class="colorCode">${chosen_code}</p><p class="colorname">${result.colors[i].name.value}</p></div>`
                 element.setAttribute("style", `color: ${result.colors[i].contrast.value}; background: ${result.colors[i].hex.value};`)
             }
         }
@@ -120,7 +119,7 @@ function addCell() {
     url = url.substring(0, url.length-1) + (cells.length+1)
     fetch(url).then(res=>res.json()).then(result=>{
         div.innerHTML = `<div class = "shadesField"></div><div class="colorTools"><i class="fa-solid fa-trash"></i><i class="fa-solid fa-heart"></i><i class="fa-solid fa-swatchbook"></i><i class="fa-solid fa-lock-open"></i></div><div class="colorInfo"><p class="colorCode">${result.colors[cells.length-1].hex.value}</p><p class="colorname">${result.colors[cells.length-1].name.value}</p></div>`
-        div.setAttribute("style", `background: ${result.colors[cells.length-1].hex.value}; color: ${result.colors[cells.length-1].contrast.value}`)
+        div.setAttribute("style", `color: ${result.colors[cells.length-1].contrast.value};background: ${result.colors[cells.length-1].hex.value};`)
     })
     container.append(div)
 }
@@ -141,4 +140,33 @@ menu_btn.addEventListener("click", ()=>{
 
 menu_close.addEventListener("click", ()=>{
     menu.classList.toggle("_active")
+})
+
+mode_field.onchange=()=>{ //color scheme
+    getColors()
+}
+
+color_field.onchange=()=>{ //color
+    getColors()
+}
+
+add_btn.addEventListener("click", ()=>{ //add cell button
+    if (mode_field.value!="triad" || mode_field.value!="quad") {
+        addCell()
+    } 
+})
+
+remove_btn.addEventListener("click", ()=>{ //remove cell button
+    if (mode_field.value!="triad" || mode_field.value!="quad") {
+        removeCell()
+    }
+})
+
+reset_btn.addEventListener("click",()=>{ //reset all
+    mode_field.value = "randomize"
+    color_field.value = "#000000"
+    codeSelector.value = "hex"
+    preview_field.src = ""
+    file_field.value = ""
+    getColors()
 })

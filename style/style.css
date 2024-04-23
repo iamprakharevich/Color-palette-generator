@@ -15,13 +15,18 @@
 }
 
 body{
+    box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 header{
@@ -61,7 +66,7 @@ i:hover{
 
 .tools{
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     align-items: center;
 }
 
@@ -97,6 +102,13 @@ main{
     padding: 1rem 0;
 }
 
+.shadesField{
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
 .colorTools{
     visibility: hidden;
     opacity: 0;
@@ -105,11 +117,13 @@ main{
     align-items: center;
     gap: 1rem;
     transition: .3s ease-in-out;
+    transform: translateY(1rem);
 }
 
 .cell:hover .colorTools{
     visibility: visible;
     opacity: 1;
+    transform: translateY(0);
 }
 
 .colorInfo{
@@ -136,7 +150,8 @@ footer a{
 }
 
 .right-menu{
-    position: absolute;
+    box-sizing: border-box;
+    position: fixed;
     width: 0;
     height: 100%;
     right: 0;

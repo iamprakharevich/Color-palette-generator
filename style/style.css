@@ -97,10 +97,18 @@ main{
 }
 
 .colorTools{
+    visibility: hidden;
+    opacity: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    transition: .3s ease-in-out;
+}
+
+.cell:hover .colorTools{
+    visibility: visible;
+    opacity: 1;
 }
 
 .colorInfo{

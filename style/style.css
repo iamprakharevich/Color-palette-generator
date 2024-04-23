@@ -72,6 +72,7 @@ i:hover{
     border: none;
     text-align: center;
     font-size: .95rem;
+    cursor: pointer;
 }
 
 main{
@@ -113,6 +114,11 @@ main{
 
 .colorInfo{
     text-align: center;
+}
+
+.colorCode{
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 footer{

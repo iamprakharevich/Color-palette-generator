@@ -48,6 +48,11 @@ function updateAllParams() {
 
 setInterval(()=>{
     updateAllParams()
+    colorCode.forEach(element => {
+        element.onclick = () => {
+            copyToClipboard(element.innerHTML)
+        }
+    })
 }, 1000)
 
 //Randomize params function

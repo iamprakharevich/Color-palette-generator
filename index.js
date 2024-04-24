@@ -199,6 +199,30 @@ reset_btn.addEventListener("click",()=>{ //reset all
     getColors()
 })
 
+// +html2pdf
+
+document.querySelector(".fa-print").addEventListener("click", (generatePDF))
+
+function generatePDF() {
+    html2pdf().from(container).save();
+}
+
+// -html2pdf
+
+// +copy2buffer
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      console.log(`Color ${text} copied to clipboard`);
+    })
+    .catch((error) => {
+      console.error('Error copying to clipboard:', error);
+    });
+}
+
+// -copy2buffer
+
 //Hotkeys
 document.addEventListener('keypress', function(event) {
     switch (event.code) {

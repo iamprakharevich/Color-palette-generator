@@ -30,14 +30,25 @@ chosen_mode = "", chosen_color = "", chosen_code = "",
 menu = document.querySelector(".right-menu"),
 menu_btn = document.querySelector(".fa-bars"),
 menu_close = document.querySelector(".fa-xmark"),
+colorCode = document.querySelectorAll(".colorCode"),
+colorname = document.querySelectorAll(".colorname"),
+colorTools = document.querySelectorAll(".colorTools"),
 mode = ["monochrome", "monochrome-dark", "monochrome-light", "analogic", "complement", "analogic-complement", "triad", "quad"],
 url = "", lockedId
 
 // Dynamic variable update function
 
 function updateAllParams() {
-    cells = document.querySelectorAll(".cells")
+    cells = document.querySelectorAll(".cell")
+    colorCode = document.querySelectorAll(".colorCode")
+    colorname = document.querySelectorAll(".colorname")
+    colorTools = document.querySelectorAll(".colorTools")
+    shades_field = document.querySelectorAll(".shadesField")
 }
+
+setInterval(()=>{
+    updateAllParams()
+}, 1000)
 
 //Randomize params function
 
@@ -64,25 +75,7 @@ async function getColors(){
     }
     if (mode_field.value == "randomize") {
         chosen_mode = mode[randomize("mode")]
-    } else if(mode_field.value == "triad"){
-        for (let i = 0; i < cells.length; i++) {
-            const element = cells[i];
-            while (i>=3) {
-                cells[i].remove()
-            }
-        }
-    } else if(mode_field.value == "quad"){
-        if (cells.length<4) {
-            addCell()
-        } else if (cells.length>4) {
-            for (let i = 0; i < cells.length; i++) {
-                const element = cells[i];
-                while (i>=4) {
-                    cells[i].remove()
-                }
-            }
-        }
-    }
+    } else {chosen_mode = mode_field.value}
     url = `https://www.thecolorapi.com/scheme?hex=${chosen_color}&mode=${chosen_mode}&count=${cells.length}`;
     fetch(url).then(res=>res.json()).then(result=>{
         for (let i = 0; i < cells.length; i++) {
@@ -109,8 +102,8 @@ async function getColors(){
             }
         }
         fetchedColor = result
-        console.log(result)
     })
+    updateAllParams()
 }
 
 function addCell() {
@@ -122,10 +115,12 @@ function addCell() {
         div.setAttribute("style", `color: ${result.colors[cells.length-1].contrast.value};background: ${result.colors[cells.length-1].hex.value};`)
     })
     container.append(div)
+    updateAllParams()
 }
 
 function removeCell() {
     container.lastChild.remove()
+    updateAllParams()
 }
 
 //Event listeners
@@ -143,6 +138,27 @@ menu_close.addEventListener("click", ()=>{
 })
 
 mode_field.onchange=()=>{ //color scheme
+    if(mode_field.value == "triad"){
+        if (cells.length>=3) {
+            while (cells.length>3) {
+                removeCell()
+            }
+        } else {
+            while (cells.length<3) {
+                addCell()
+            }
+        }
+    } else if(mode_field.value == "quad"){
+        if (cells.length>=4) {
+            while (cells.length>4) {
+                removeCell()
+            }
+        } else {
+            while (cells.length<4) {
+                addCell()
+            }
+        }
+    }
     getColors()
 }
 
@@ -166,8 +182,15 @@ reset_btn.addEventListener("click",()=>{ //reset all
     mode_field.value = "randomize"
     color_field.value = "#000000"
     codeSelector.value = "hex"
-    preview_field.src = ""
-    file_field.value = ""
+    if (cells.length>=5) {
+        while (cells.length>5) {
+            removeCell()
+        }
+    } else {
+        while (cells.length<5) {
+            addCell()
+        }
+    }
     getColors()
 })
 

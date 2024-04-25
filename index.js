@@ -53,6 +53,20 @@ setInterval(()=>{
             copyToClipboard(element.innerHTML)
         }
     })
+    for (let i = 0; i < cells.length; i++) { //color tools buttons
+        const element0 = colorTools[i].childNodes[0];
+        element0.onclick = () => { //delete cell
+            cells[i].remove()
+        }
+        const element3 = colorTools[i].childNodes[3];
+        element3.onclick = () => { //lock and unlock color generate
+            if (element3.classList.contains("fa-lock-open")) {
+                lockColor(element3,i)
+            } else {
+                unlockColor(element3,i)
+            }
+        }
+    }
 }, 1000)
 
 //Randomize params function
@@ -222,6 +236,24 @@ function copyToClipboard(text) {
 }
 
 // -copy2buffer
+
+// +lockColor
+
+function lockColor(element,i) {
+    element.classList.replace("fa-lock-open","fa-lock")
+    colorTools[i].classList.add("_locked")
+    color_field.value = colorCode[i].innerHTML
+    lockedId = i
+}
+
+function unlockColor(element,i) {
+    colorTools[i].classList.remove("_locked")
+    element.classList.replace("fa-lock","fa-lock-open")
+    color_field.value = "#000000"
+    lockedId = undefined
+}
+
+// -lockColor
 
 //Hotkeys
 document.addEventListener('keypress', function(event) {

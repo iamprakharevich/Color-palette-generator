@@ -135,6 +135,14 @@ main{
     cursor: pointer;
 }
 
+._locked{
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0px);
+    transition: all .3s ease-in-out;
+}
+
 footer{
     width: 100%;
     display: flex;

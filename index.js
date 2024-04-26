@@ -33,6 +33,8 @@ menu_close = document.querySelector(".fa-xmark"),
 colorCode = document.querySelectorAll(".colorCode"),
 colorname = document.querySelectorAll(".colorname"),
 colorTools = document.querySelectorAll(".colorTools"),
+rm_cont_head = document.querySelectorAll(".rm-content-header p"),
+rm_cont_cont = document.querySelectorAll(".rm-content-container div"),
 mode = ["monochrome", "monochrome-dark", "monochrome-light", "analogic", "complement", "analogic-complement", "triad", "quad"],
 url = "", lockedId
 
@@ -66,6 +68,27 @@ setInterval(()=>{
                 unlockColor(element3,i)
             }
         }
+    }
+    for (let i = 0; i < rm_cont_head.length; i++) {
+        const element = rm_cont_head[i];
+        element.addEventListener("click",()=>{
+            switch (i) {
+                case 0:
+                    rm_cont_head[i].classList.add("_rm_active")
+                    rm_cont_head[i+1].classList.remove("_rm_active")
+                    rm_cont_cont[i].setAttribute("style","display:flex;")
+                    rm_cont_cont[i+1].setAttribute("style","display:none;")
+                    break;
+                case 1:
+                    rm_cont_head[i].classList.add("_rm_active")
+                    rm_cont_head[i-1].classList.remove("_rm_active")
+                    rm_cont_cont[i].setAttribute("style","display:flex;")
+                    rm_cont_cont[i-1].setAttribute("style","display:none;")
+                    break;
+                default:
+                    break;
+            }
+        })
     }
 }, 1000)
 

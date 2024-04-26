@@ -35,6 +35,9 @@ colorname = document.querySelectorAll(".colorname"),
 colorTools = document.querySelectorAll(".colorTools"),
 rm_cont_head = document.querySelectorAll(".rm-content-header p"),
 rm_cont_cont = document.querySelectorAll(".rm-content-container div"),
+favorite_colors = document.querySelector(".rm-library"),
+favorite_color = document.querySelectorAll(".favorite-color"),
+favorite_color_name = document.querySelectorAll(".fav-name"),
 mode = ["monochrome", "monochrome-dark", "monochrome-light", "analogic", "complement", "analogic-complement", "triad", "quad"],
 url = "", lockedId
 
@@ -46,6 +49,9 @@ function updateAllParams() {
     colorname = document.querySelectorAll(".colorname")
     colorTools = document.querySelectorAll(".colorTools")
     shades_field = document.querySelectorAll(".shadesField")
+    favorite_colors = document.querySelector(".rm-library")
+    favorite_color = document.querySelectorAll(".favorite-color")
+    favorite_color_name = document.querySelectorAll(".fav-name")
 }
 
 setInterval(()=>{
@@ -60,6 +66,11 @@ setInterval(()=>{
         element0.onclick = () => { //delete cell
             cells[i].remove()
         }
+        const element1 = colorTools[i].childNodes[1];
+        element1.onclick = () => {
+            localStorage.setItem(`${fetchedColor.colors[i].name.value}`, JSON.stringify(fetchedColor.colors[i]))
+            fetchFavoriteColor()
+        }
         const element3 = colorTools[i].childNodes[3];
         element3.onclick = () => { //lock and unlock color generate
             if (element3.classList.contains("fa-lock-open")) {
@@ -69,25 +80,18 @@ setInterval(()=>{
             }
         }
     }
-    for (let i = 0; i < rm_cont_head.length; i++) {
-        const element = rm_cont_head[i];
-        element.addEventListener("click",()=>{
-            switch (i) {
-                case 0:
-                    rm_cont_head[i].classList.add("_rm_active")
-                    rm_cont_head[i+1].classList.remove("_rm_active")
-                    rm_cont_cont[i].setAttribute("style","display:flex;")
-                    rm_cont_cont[i+1].setAttribute("style","display:none;")
-                    break;
-                case 1:
-                    rm_cont_head[i].classList.add("_rm_active")
-                    rm_cont_head[i-1].classList.remove("_rm_active")
-                    rm_cont_cont[i].setAttribute("style","display:flex;")
-                    rm_cont_cont[i-1].setAttribute("style","display:none;")
-                    break;
-                default:
-                    break;
-            }
+    for (let i = 0; i < favorite_color.length; i++) {
+        favorite_color[i].querySelector(".fa-trash").addEventListener("click",()=>{
+            localStorage.removeItem(`${favorite_color_name[i].innerHTML}`)
+            fetchFavoriteColor()
+        })
+        favorite_color[i].querySelector(".fav-name").addEventListener("click",()=>{
+            color_field.value = favorite_color[i].querySelector(".fav-color").innerHTML;
+            getColors()
+        })
+        favorite_color[i].querySelector(".fav-color").addEventListener("click",()=>{
+            const element4 = favorite_color[i].querySelector(".fav-color")
+            copyToClipboard(element4.innerHTML)
         })
     }
 }, 1000)
@@ -148,6 +152,34 @@ async function getColors(){
     updateAllParams()
 }
 
+function fetchFavoriteColor() {
+    favorite_colors.innerHTML = "";
+    for (let i = 0; i < localStorage.length; i++) {
+        const element = JSON.parse(localStorage.getItem(localStorage.key(i)));
+        switch (codeSelector.value) {
+            case "hex":
+                chosen_code = element.hex.value
+                break;
+            case "rgb":
+                chosen_code = element.rgb.value
+                break;
+            case "hsl":
+                chosen_code = element.hsl.value
+                break;
+            case "cmyk":
+                chosen_code = element.cmyk.value
+                break;
+            default:
+                break;
+        }
+        var div = document.createElement('div')
+        div.className = "favorite-color"
+        div.setAttribute("style", `background: ${element.hex.value};color:${element.contrast.value}`)
+        div.innerHTML = `<div class="fav-info""><p class="fav-name">${element.name.value}</p><p class="fav-color">${element.hex.value}</p></div><i class="fa-solid fa-trash"></i>`
+        favorite_colors.append(div)
+    }
+}
+
 function addCell() {
     var div = document.createElement('div')
     div.className = "cell"
@@ -165,6 +197,10 @@ function removeCell() {
     updateAllParams()
 }
 
+function removeFavorite(i) {
+    favorite_colors[i].remove
+}
+
 //Event listeners
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -173,6 +209,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 menu_btn.addEventListener("click", ()=>{
     menu.classList.toggle("_active")
+    fetchFavoriteColor()
 })
 
 menu_close.addEventListener("click", ()=>{
@@ -277,6 +314,28 @@ function unlockColor(element,i) {
 }
 
 // -lockColor
+
+for (let i = 0; i < rm_cont_head.length; i++) {
+    const element = rm_cont_head[i];
+    element.addEventListener("click",()=>{
+        switch (i) {
+            case 0:
+                rm_cont_head[i].classList.add("_rm_active")
+                rm_cont_head[i+1].classList.remove("_rm_active")
+                rm_cont_cont[i].setAttribute("style","display:flex;")
+                rm_cont_cont[i+1].setAttribute("style","display:none;")
+                break;
+            case 1:
+                rm_cont_head[i].classList.add("_rm_active")
+                rm_cont_head[i-1].classList.remove("_rm_active")
+                rm_cont_cont[i].setAttribute("style","display:flex;")
+                rm_cont_cont[i-1].setAttribute("style","display:none;")
+                break;
+            default:
+                break;
+        }
+    })
+}
 
 //Hotkeys
 document.addEventListener('keypress', function(event) {

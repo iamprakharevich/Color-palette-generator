@@ -531,7 +531,6 @@ function toHSL() {
     for (let i = 0; i < colorCode.length; i++) {
         const element = colorCode[i];
         element.innerHTML = fetchedColor.colors[i].hsl.value
-        element.setAttribute("style","font-size: 2rem;")
     }
     for (let i = 0; i < shades_field_active.length; i++) {
         const element = shades_field_active[i];

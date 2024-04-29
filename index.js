@@ -32,6 +32,7 @@ menu_btn = document.querySelector(".fa-bars"),
 menu_close = document.querySelector(".fa-xmark"),
 codeSelector = document.getElementById("codeSelector"),
 shades_field = document.querySelectorAll(".shadesField"),
+shades_field_active = document.querySelectorAll("._active_shades"),
 colorCode = document.querySelectorAll(".colorCode"),
 colorname = document.querySelectorAll(".colorname"),
 colorTools = document.querySelectorAll(".colorTools"),
@@ -52,6 +53,7 @@ function updateAllParams() {
     colorname = document.querySelectorAll(".colorname")
     colorTools = document.querySelectorAll(".colorTools")
     shades_field = document.querySelectorAll(".shadesField")
+    shades_field_active = document.querySelectorAll("._active_shades")
     favorite_colors = document.querySelector(".rm-library")
     favorite_color = document.querySelectorAll(".favorite-color")
     favorite_color_name = document.querySelectorAll(".fav-name")
@@ -387,6 +389,10 @@ async function getShades(color,i) {
             shades_field[i].prepend(div)
         }
     }
+}
+
+function hslToHsl([h,s,l]) {
+    return [h,s,l];
 }
 
 function hslToHex([h, s, l]) {

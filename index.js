@@ -304,6 +304,7 @@ function lockColor(element,i) {
     colorTools[i].classList.add("_locked")
     color_field.value = colorCode[i].innerHTML
     lockedId = i
+    getColors()
 }
 
 function unlockColor(element,i) {

@@ -30,6 +30,7 @@ chosen_mode = "", chosen_color = "", chosen_code = "",
 menu = document.querySelector(".right-menu"),
 menu_btn = document.querySelector(".fa-bars"),
 menu_close = document.querySelector(".fa-xmark"),
+codeSelector = document.getElementById("codeSelector"),
 shades_field = document.querySelectorAll(".shadesField"),
 colorCode = document.querySelectorAll(".colorCode"),
 colorname = document.querySelectorAll(".colorname"),
@@ -478,9 +479,7 @@ function hslToHex([h, s, l]) {
     cmyk.k *= 100;
   
     return cmyk;
-  }
-  
-  // -colorShades
+}
 
 // -color shades generation
 
@@ -560,6 +559,10 @@ function switchColorCode() {
         default:
             break;
     }
+}
+
+codeSelector.onchange=()=>{ //hex/rgb/hsl/cmyk selector
+    switchColorCode();
 }
 
 // -color models switch

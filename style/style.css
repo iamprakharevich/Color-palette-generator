@@ -99,7 +99,7 @@ main{
     align-items: center;
     flex-wrap: nowrap;
     gap: 1rem;
-    padding: 1rem 0;
+    padding: 0 0 1rem 0;
 }
 
 .shadesField{
@@ -107,6 +107,17 @@ main{
     flex-direction: column;
     width: 100%;
     height: 100%;
+}
+
+.shade{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+._active_shades{
+    display: flex;
 }
 
 .colorTools{
@@ -208,7 +219,7 @@ footer a{
     transition: .3s ease-in-out;
 }
 
-._rm_active{
+._active_btn{
     color: var(--yellow);
     text-shadow: 0 0 5px rgba(245,203,92,.5);
 }

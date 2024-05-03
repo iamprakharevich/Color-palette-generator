@@ -79,7 +79,6 @@ setInterval(()=>{
         const element2 = colorTools[i].childNodes[2];
         element2.onclick = () => {
             getShades(fetchedColor.colors[i].hsl,i)
-            console.log(i)
         }
         const element3 = colorTools[i].childNodes[3];
         element3.onclick = () => { //lock and unlock color generate
@@ -307,6 +306,19 @@ function copyToClipboard(text) {
 
 // -copy2buffer
 
+// +fullScreen
+
+let fullScreen_btn = document.querySelector(".fa-expand")
+
+fullScreen_btn.addEventListener("click", ()=>{
+    container.requestFullscreen();
+    cells.forEach(element => {
+        element.classList.add("_fs")
+    })
+})
+
+// -fullScreen
+
 // +lockColor
 
 function lockColor(element,i) {
@@ -477,14 +489,14 @@ function hslToHex([h, s, l]) {
       c: (1 - r / 255 - k) / (1 - k),
       m: (1 - g / 255 - k) / (1 - k),
       y: (1 - b / 255 - k) / (1 - k),
-      k: k
+      k: 0
     };
     cmyk.c *= 100;
     cmyk.m *= 100;
     cmyk.y *= 100;
     cmyk.k *= 100;
   
-    return cmyk;
+    return [ Math.round(cmyk.c), Math.round(cmyk.m), Math.round(cmyk.y), Math.round(cmyk.k)];
 }
 
 // -color shades generation
